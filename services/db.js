@@ -1,6 +1,8 @@
+import { userModel } from "@/models/user.models";
+import { replaceMongoIdInObject } from "@/utils/data-util";
 import mongoose from "mongoose";
 
-export async function dbConnect() {
+export const dbConnect = async () => {
   try {
     const conn = await mongoose.connect(process.env.MONGO_URI, {
       dbName: "eventry",
@@ -10,4 +12,12 @@ export async function dbConnect() {
   } catch (err) {
     console.log(err);
   }
-}
+};
+
+export const findUserByCredentials = async (credentials) => {
+  const user = await userModel.findOne(credentials).lean();
+  if (user) {
+    return replaceMongoIdInObject(user);
+  }
+  return null;
+};
