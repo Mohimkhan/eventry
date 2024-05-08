@@ -1,3 +1,5 @@
+"use server";
+
 import { eventModel } from "@/models/event.models";
 
 import { replaceMongoIdInArray, replaceMongoIdInObject } from "@/utils/data-util";
