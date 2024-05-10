@@ -1,11 +1,12 @@
 'use client';
 
-import { createContext, useState } from "react";
+import useLocalStorage from "@/hooks/useLocaleStorage";
+import { createContext } from "react";
 
-export const AuthContext = createContext();
+export const AuthContext = createContext({});
 
 const AuthProvider = ({ children }) => {
-  const [auth, setAuth] = useState();
+  const [auth, setAuth] = useLocalStorage({});
 
   return (
     <AuthContext.Provider value={{ auth, setAuth }}>
