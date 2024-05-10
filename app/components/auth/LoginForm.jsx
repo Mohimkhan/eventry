@@ -1,14 +1,11 @@
 "use client";
 
-import { useState } from "react";
 import { performLogin } from "@/actions/user";
 
 import { useAuth } from "@/hooks/useAuth";
 import { useRouter } from "next/navigation";
 
 const LoginForm = () => {
-  const [error, setError] = useState("");
-
   const { setAuth } = useAuth();
   const router = useRouter();
 
@@ -20,12 +17,15 @@ const LoginForm = () => {
 
       if (found) {
         setAuth(found);
+        toast.success(`Welcome, ${found?.name}`, {
+          icon: <span>🚀</span>,
+        });
         router.push("/");
-      } else {
-        setError("Please provide a valid login credential");
       }
     } catch (err) {
-      setError(err.message);
+      toast.success(`User not found!`, {
+        icon: <span>❌</span>
+      })
     }
   };
 
