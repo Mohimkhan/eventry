@@ -1,10 +1,14 @@
+"use client";
+
 import { registerUser } from "@/actions/user";
 import { toast } from "react-toastify";
 
 const RegistrationForm = () => {
 
-  const handleSubmit  = async (formData) => {
+  const handleSubmit  = async (event) => {
+    event.preventDefault();
     try {
+      const formData = new FormData(event.currentTarget);
       await registerUser(formData);
       toast.success("User Created Successfully", {
         icon: <span>🚀</span>
@@ -15,6 +19,7 @@ const RegistrationForm = () => {
       })
     }
   }
+
   return (
     <form
       className="login-form"
