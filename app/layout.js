@@ -18,10 +18,10 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <NavBar />
-        <main className="py-8">
-          <AuthProvider>{children}</AuthProvider>
-        </main>
+        <AuthProvider>
+          <NavBar />
+          <main className="py-8">{children}</main>
+        </AuthProvider>
         <ToastContainer
           position="top-right"
           theme="dark"
