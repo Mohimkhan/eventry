@@ -21,3 +21,7 @@ export const findUserByCredentials = async (credentials) => {
   }
   return null;
 };
+
+export const createUser = async (user) => {
+  return await userModel.create(user);
+};
