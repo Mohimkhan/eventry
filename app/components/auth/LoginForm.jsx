@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 
 const LoginForm = () => {
-  const { setAuth } = useAuth();
+  const {_, setAuth } = useAuth();
   const router = useRouter();
 
   const onSubmit = async (event) => {
