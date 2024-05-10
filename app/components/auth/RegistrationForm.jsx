@@ -23,7 +23,7 @@ const RegistrationForm = () => {
   return (
     <form
       className="login-form"
-      action={handleSubmit}
+      onSubmit={handleSubmit}
     >
       <div>
         <label htmlFor="name">Full Name</label>
