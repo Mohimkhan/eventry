@@ -4,6 +4,7 @@ import NavBar from "./components/Navbar";
 import { dbConnect } from "@/services/db";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import AuthProvider from "@/contexts/AuthContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,8 +19,13 @@ export default async function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <NavBar />
-        <main className="py-8">{children}</main>
-        <ToastContainer position="top-right" theme="dark"></ToastContainer>
+        <main className="py-8">
+          <AuthProvider>{children}</AuthProvider>
+        </main>
+        <ToastContainer
+          position="top-right"
+          theme="dark"
+        ></ToastContainer>
       </body>
     </html>
   );
