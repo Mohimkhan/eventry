@@ -4,6 +4,7 @@ import { performLogin } from "@/actions/user";
 
 import { useAuth } from "@/hooks/useAuth";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 const LoginForm = () => {
   const { setAuth } = useAuth();
@@ -14,7 +15,7 @@ const LoginForm = () => {
     try {
       const formData = new FormData(event.currentTarget);
       const found = await performLogin(formData);
-
+      
       if (found) {
         setAuth(found);
         toast.success(`Welcome, ${found?.name}`, {
@@ -31,7 +32,6 @@ const LoginForm = () => {
 
   return (
     <>
-      <div className="my-2 text-red-500">{error}</div>
       <form
         className="login-form"
         onSubmit={onSubmit}
