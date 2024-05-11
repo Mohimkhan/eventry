@@ -17,7 +17,7 @@ const LoginForm = () => {
       const found = await performLogin(formData);
       
       if (found) {
-        setAuth(found);
+        setAuth({...found, password: null, phone: null});
         toast.success(`Welcome, ${found?.name}`, {
           icon: <span>🚀</span>,
         });
