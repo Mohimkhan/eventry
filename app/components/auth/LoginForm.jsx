@@ -6,6 +6,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import SubmitButton from "../SubmitButton";
 
 const LoginForm = () => {
   const { _, setAuth } = useAuth();
@@ -56,21 +57,21 @@ const LoginForm = () => {
             id="password"
             onChange={() => setShowEyeIcon(true)}
           />
-          {showEyeIcon && (<span className="absolute top-[41px] right-2 text-black" onClick={() => {
-            setShowPassword(!showPassword)
-          }}>
-            <i
-              className={`fas ${showPassword ? "fa-eye" : "fa-eye-slash"}`}
-            ></i>
-          </span>)}
+          {showEyeIcon && (
+            <span
+              className="absolute top-[41px] right-2 text-black"
+              onClick={() => {
+                setShowPassword(!showPassword);
+              }}
+            >
+              <i
+                className={`fas ${showPassword ? "fa-eye" : "fa-eye-slash"}`}
+              ></i>
+            </span>
+          )}
         </div>
 
-        <button
-          type="submit"
-          className="btn-primary w-full mt-4 bg-indigo-600 hover:bg-indigo-800"
-        >
-          Login
-        </button>
+        <SubmitButton>Login</SubmitButton>
       </form>
     </>
   );
