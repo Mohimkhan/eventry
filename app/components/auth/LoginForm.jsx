@@ -4,10 +4,13 @@ import { performLogin } from "@/actions/user";
 
 import { useAuth } from "@/hooks/useAuth";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { toast } from "react-toastify";
 
 const LoginForm = () => {
-  const {_, setAuth } = useAuth();
+  const { _, setAuth } = useAuth();
+  const [showPassword, setShowPassword] = useState(false);
+  const [showEyeIcon, setShowEyeIcon] = useState(false);
   const router = useRouter();
 
   const onSubmit = async (event) => {
@@ -15,9 +18,9 @@ const LoginForm = () => {
     try {
       const formData = new FormData(event.currentTarget);
       const found = await performLogin(formData);
-      
+
       if (found) {
-        setAuth({...found, password: null, phone: null});
+        setAuth({ ...found, password: null, phone: null });
         toast.success(`Welcome, ${found?.name}`, {
           icon: <span>🚀</span>,
         });
@@ -25,8 +28,8 @@ const LoginForm = () => {
       }
     } catch (err) {
       toast.success(`User not found!`, {
-        icon: <span>❌</span>
-      })
+        icon: <span>❌</span>,
+      });
     }
   };
 
@@ -45,13 +48,21 @@ const LoginForm = () => {
           />
         </div>
 
-        <div>
+        <div className="relative">
           <label htmlFor="password">Password</label>
           <input
-            type="password"
+            type={`${showPassword ? "text" : "password"}`}
             name="password"
             id="password"
+            onChange={() => setShowEyeIcon(true)}
           />
+          {showEyeIcon && (<span className="absolute top-[41px] right-2 text-black" onClick={() => {
+            setShowPassword(!showPassword)
+          }}>
+            <i
+              className={`fas ${showPassword ? "fa-eye" : "fa-eye-slash"}`}
+            ></i>
+          </span>)}
         </div>
 
         <button

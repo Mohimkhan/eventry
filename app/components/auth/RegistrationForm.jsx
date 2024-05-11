@@ -1,9 +1,12 @@
 "use client";
 
 import { registerUser } from "@/actions/user";
+import { useState } from "react";
 import { toast } from "react-toastify";
 
 const RegistrationForm = () => {
+  const [showPassword, setShowPassword] = useState(false);
+  const [showEyeIcon, setShowEyeIcon] = useState(false);
 
   const handleSubmit  = async (event) => {
     event.preventDefault();
@@ -43,14 +46,22 @@ const RegistrationForm = () => {
         />
       </div>
 
-      <div>
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          name="password"
-          id="password"
-        />
-      </div>
+      <div className="relative">
+          <label htmlFor="password">Password</label>
+          <input
+            type={`${showPassword ? "text" : "password"}`}
+            name="password"
+            id="password"
+            onChange={() => setShowEyeIcon(true)}
+          />
+          {showEyeIcon && (<span className="absolute top-[41px] right-2 text-black" onClick={() => {
+            setShowPassword(!showPassword)
+          }}>
+            <i
+              className={`fas ${showPassword ? "fa-eye" : "fa-eye-slash"}`}
+            ></i>
+          </span>)}
+        </div>
 
       <div>
         <label htmlFor="phone">Phone Number</label>
